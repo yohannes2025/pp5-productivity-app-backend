@@ -101,8 +101,21 @@
 #     return render(request, 'productivity_app/home.html', {})
 
 
-from django.http import HttpResponse
+# from django.http import HttpResponse
+
+
+
+# def home(request):
+#     return HttpResponse("Welcome to the Productivity App!")
+
+
+# productivity_app/views.py
+from django.shortcuts import render
 
 
 def home(request):
-    return HttpResponse("Welcome to the Productivity App!")
+    """
+    View function for the home page.
+    """
+    # Add your logic for the home page here
+    return render(request, 'productivity_app/home.html', {})
