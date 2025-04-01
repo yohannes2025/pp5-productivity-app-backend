@@ -1,13 +1,28 @@
-# productivity_app/urls.py
-from django.urls import include, path
-from rest_framework.routers import DefaultRouter
-from . import views
+# # productivity_app/urls.py
+# from django.urls import include, path
+# from rest_framework.routers import DefaultRouter
+# from . import views
 
-router = DefaultRouter()
-router.register(r'tasks', views.TaskViewSet)
-router.register(r'comments', views.CommentViewSet)
+# router = DefaultRouter()
+# router.register(r'tasks', views.TaskViewSet)
+# router.register(r'comments', views.CommentViewSet)
+
+# urlpatterns = [
+#     path('', views.home, name='home'),
+#     #path('', include(router.urls)),
+# ]
+
+
+# productivity_app/urls.py
+from django.urls import path
+from . import views
+from django.http import HttpResponse
 
 urlpatterns = [
     path('', views.home, name='home'),
-    #path('', include(router.urls)),
+    path('favicon.ico', lambda request: HttpResponse(
+        status=204)),  # Placeholder for favicon
 ]
+
+
+

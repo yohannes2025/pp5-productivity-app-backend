@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Productivity App</title>
+    
+    {% load static %} <!-- Load the static template tag -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Link to CSS file -->
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Productivity App!</h1>
+    </header>
+    
+    <nav>
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            {% comment %} <li><a href="{% url 'about' %}">About</a></li> {% endcomment %}
+            {% comment %} <li><a href="{% url 'contact' %}">Contact</a></li> {% endcomment %}
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Your Productivity Partner</h2>
+            <p>This app helps you stay organized and productive. Track your tasks, set goals, and improve your focus.</p>
+            <p>Get started by adding your first task!</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Productivity App. All rights reserved.</p>
+    </footer>
+</body>
+</html>
