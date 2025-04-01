@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +29,8 @@ SECRET_KEY = 'django-insecure-unz18&ax*ybu67o9$c4soca1h7#1in1hom!b$-cc%kjn75l87i
 DEBUG = False
 
 ALLOWED_HOSTS = [
-    "pp5-productivity-app-backend-0664e915b231.herokuapp.com", "localhost", "127.0.0.1", '.herokuapp.com']
+    # "pp5-productivity-app-backend-0664e915b231.herokuapp.com", "localhost", "127.0.0.1", '.herokuapp.com'
+    ]
 
 # Application definition
 
@@ -85,13 +88,19 @@ WSGI_APPLICATION = 'drf_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
+if 'DEV' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+else:  
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    }
+    print('connected')
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -140,7 +149,20 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
+    'DEFAULT_RENDERER_CLASSES': [
+        'rest_framework.renderers.JSONRenderer',
+    ],
+    # Fixed typo here
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,  # Also fix 'PAGE SIZE' to 'PAGE_SIZE'
+    'DATETIME_FORMAT': '%d %b %Y',
 }
+
+# Corrected part of the settings.py file
+if 'DEV' not in os.environ:
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
+        'rest_framework.renderers.JSONRenderer'
+    ]
 
 CSRF_COOKIE_SECURE = False
 
@@ -149,3 +171,8 @@ CORS_ALLOWED_ORIGINS = [
     # Replace with your production frontend URL
     #"https://pp5-productivity-app-frontend-df4e2e7948c6.herokuapp.com/",
 ]
+
+REST_USE_JWT = True
+JWT_AUTH_SECURE = True
+JWT_AUTH_COOKIE = "productivity_app-auth"
+JWT_AUTH_REFRESH_COOKIE = "my-refresh-token"
