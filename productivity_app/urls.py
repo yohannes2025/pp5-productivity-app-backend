@@ -8,5 +8,6 @@ router.register(r'tasks', views.TaskViewSet)
 router.register(r'comments', views.CommentViewSet)
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('', views.home, name='home'),
+    #path('', include(router.urls)),
 ]
