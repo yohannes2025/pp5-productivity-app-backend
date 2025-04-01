@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-unz18&ax*ybu67o9$c4soca1h7#1in1hom!b$-cc%kjn75l87i
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['pp5-productivity-app-backend-0664e915b231.herokuapp.com']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -127,3 +127,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}
+
+CSRF_COOKIE_SECURE = False
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Example for local dev
+    # Replace with your production frontend URL
+    #"https://pp5-productivity-app-frontend-df4e2e7948c6.herokuapp.com/",
+]
