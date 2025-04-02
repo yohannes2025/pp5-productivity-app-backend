@@ -22,6 +22,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('favicon.ico', lambda request: HttpResponse(
         status=204)),  # Placeholder for favicon
+    path('parse/<str:url>/', views.parse_view, name='parse'),
 ]
 
 

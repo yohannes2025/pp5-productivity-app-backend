@@ -119,3 +119,23 @@ def home(request):
     """
     # Add your logic for the home page here
     return render(request, 'productivity_app/home.html', {})
+
+
+def parse_view(request, url):
+    """
+    Parses the provided URL and displays the results.
+    """
+    try:
+        parsed_url = urlparse(url)
+        context = {
+            'scheme': parsed_url.scheme,
+            'netloc': parsed_url.netloc,
+            'path': parsed_url.path,
+            'params': parsed_url.params,
+            'query': parsed_url.query,
+            'fragment': parsed_url.fragment,
+        }
+        return render(request, 'parse.html', context)
+    except ValueError:
+        # Handle the case where the provided URL is invalid
+        return redirect('home')
