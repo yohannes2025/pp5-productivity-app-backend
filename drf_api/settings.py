@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback-secret-key-for-dev")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://pp5-productivity-app-backend-0664e915b231.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '... .herokuapp.com/']
 
 # CSRF_TRUSTED_ORIGINS = [
 #     "https://pp5-productivity-app-backend-0664e915b231.herokuapp.com"]
