@@ -28,8 +28,9 @@ SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback-secret-key-for-dev")
 DEBUG = 'DEV' in os.environ
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://pp5-productivity-app-backend-0664e915b231.herokuapp.com/']
-CSRF_TRUSTED_ORIGINS = [
-    "https://pp5-productivity-app-backend-0664e915b231.herokuapp.com"]
+
+# CSRF_TRUSTED_ORIGINS = [
+#     "https://pp5-productivity-app-backend-0664e915b231.herokuapp.com"]
 
 
 # Application definition
@@ -63,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
