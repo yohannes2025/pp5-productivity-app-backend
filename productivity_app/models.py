@@ -1,25 +1,29 @@
-# productivity_app/models.py
-from django.contrib.auth.models import User
+# models.py
+from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
+class User(AbstractUser):
+    """Custom user model that extends the default Django user model."""
+    pass
+
+
 class Task(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    status = models.CharField(max_length=20, choices=[
-        ('todo', 'To Do'),
-        ('in-progress', 'In Progress'),
-        ('done', 'Done')
-    ])
+    """Model for user tasks."""
+    title = models.CharField(max_length=100, blank=False)
+    description = models.TextField(blank=True)
     due_date = models.DateField()
-    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='assigned_tasks')
-    priority = models.IntegerField()
+    priority = models.IntegerField(default=1)
+    category = models.CharField(max_length=50, blank=True)
+    assigned_users = models.ManyToManyField(User, related_name='tasks')
+    is_complete = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
-class Comment(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE, related_name='comments')
-    content = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+class Attachment(models.Model):
+    """Model for task attachments."""
+    task = models.ForeignKey(
+        Task, on_delete=models.CASCADE, related_name='attachments')
+    file = models.FileField(upload_to='attachments/')
     created_at = models.DateTimeField(auto_now_add=True)
